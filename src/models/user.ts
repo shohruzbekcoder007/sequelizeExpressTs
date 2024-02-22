@@ -14,10 +14,19 @@ const User = sequelize.define('user', {
     lastName: {
         type: Sequelize.STRING
     },
-    middlename: {
+    middleName: {
         type: Sequelize.STRING
     },
     email: {
+        type: Sequelize.STRING,
+        validate: {
+            isEmail: true
+        }
+    },
+    address: {
+        type: Sequelize.STRING
+    },
+    password: {
         type: Sequelize.STRING
     }
 });

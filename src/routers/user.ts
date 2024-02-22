@@ -1,7 +1,8 @@
 import express from 'express'
-import { createUser } from '../controllers/user'
+import { createUser, loginUser } from '../controllers/user'
 const user = express.Router()
 
 user.post('/', createUser)
+user.post('/login', loginUser)
 
 export default user
