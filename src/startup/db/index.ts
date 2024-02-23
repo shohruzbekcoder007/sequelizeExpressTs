@@ -14,7 +14,7 @@ export const sequelize = new Sequelize(db_postgresql, db_user, db_pass, {
     port: <number>db_port,
 });
 
-sequelize.sync()
+sequelize.sync({ force: false })
   .then(() => {
     console.log('Tables created successfully');
   })
