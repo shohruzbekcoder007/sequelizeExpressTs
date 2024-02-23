@@ -11,7 +11,7 @@ export const sequelize = new Sequelize('todo_database', db_user, db_pass, {
     dialect: 'postgres'
 });
 
-sequelize.sync()
+sequelize.sync({ force: false })
   .then(() => {
     console.log('Tables created successfully');
   })
