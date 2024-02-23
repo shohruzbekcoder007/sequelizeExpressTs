@@ -7,9 +7,10 @@ const db_user: string = process.env.db_user || ""
 const db_pass: string = process.env.db_pass || ""
 const db_postgresql: string = process.env.db_postgresql || ""
 const db_port: string | 5432 = process.env.db_port || 5432
+const host: string = process.env.host || "localhost"
 
 export const sequelize = new Sequelize(db_postgresql, db_user, db_pass, {
-    host: 'localhost',
+    host: host,
     dialect: 'postgres',
     port: <number>db_port,
 });

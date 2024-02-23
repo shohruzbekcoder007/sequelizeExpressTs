@@ -1,18 +1,4 @@
 services:
-  postgres:
-    container_name: postgres-sequelize
-    image: postgres:latest
-    environment:
-      - PSQL_HOST=database
-      - POSTGRES_USER=${db_user}
-      - POSTGRES_PASSWORD=${db_pass}
-      - POSTGRES_DB=${db_postgresql}
-    ports:
-      - 3030:5432
-    restart: always
-    volumes:
-      - ./data/postgres/pgdata:/var/lib/postgresql/data
-
   express-typescript:
     build:
       context: .
@@ -31,10 +17,23 @@ services:
       - TWITTER_KEY=
       - TWITTER_SECRET=
       - PSQL_HOST=postgres
-      # - NODE_ENV = production
+      - NODE_ENV = production
     command: sh -c "npm install && npm run dev"
     ports:
       - 4040:4040
       - 5550:5550
       - 8000:8000
       - 8080:8080
+      - 3000:3000
+  postgres:
+    container_name: postgres-sequelize
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=${db_user}
+      - POSTGRES_PASSWORD=${db_pass}
+      - POSTGRES_DB=${db_postgresql}
+    ports:
+      - 3030:5432
+    restart: always
+    volumes:
+      - ./data/postgres/pgdata:/var/lib/postgresql/data
