@@ -1,0 +1,40 @@
+services:
+  postgres:
+    container_name: postgres-sequelize
+    image: postgres:latest
+    environment:
+      - PSQL_HOST=database
+      - POSTGRES_USER=${db_user}
+      - POSTGRES_PASSWORD=${db_pass}
+      - POSTGRES_DB=${db_postgresql}
+    ports:
+      - 3030:5432
+    restart: always
+    volumes:
+      - ./data/postgres/pgdata:/var/lib/postgresql/data
+
+  express-typescript:
+    build:
+      context: .
+      dockerfile: local.Dockerfile
+    depends_on:
+      - postgres
+    container_name: 'app-express-sequelize'
+    volumes:
+      - .:/usr/src/app/
+    working_dir: /usr/src/app
+    environment:
+      - REDIS_QUEUE_HOST=redis
+      - MONGOOSE_URL=mongodb://mongo:27017/typescript_mongoose
+      - GOOGLE_ID=
+      - GOOGLE_SECRET=
+      - TWITTER_KEY=
+      - TWITTER_SECRET=
+      - PSQL_HOST=postgres
+      # - NODE_ENV = production
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 4040:4040
+      - 5550:5550
+      - 8000:8000
+      - 8080:8080

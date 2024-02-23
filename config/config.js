@@ -3,7 +3,7 @@ module.exports = {
   "development": {
     "username": process.env.db_user,
     "password": process.env.db_pass,
-    "database": "todo_database",
+    "database": "postgres",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
